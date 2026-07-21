@@ -33,6 +33,9 @@ music-player-app/
 - Shuffle & repeat options
 - Dark mode
 
+## Live Demo Link 
+https://neonrythm.netlify.app/
+
 ## 🙌 Author
 
 Muhammad Salman Tahir
