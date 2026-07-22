@@ -34,8 +34,7 @@ music-player-app/
 - Dark mode
 
 ## Live Demo Link 
-https://neonrythm.netlify.app/
-
+https://king234-coder.github.io/music-player-app/
 ## 🙌 Author
 
 Muhammad Salman Tahir
