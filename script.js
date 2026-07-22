@@ -10,8 +10,8 @@ let playlistUI = document.getElementById("playlist");
 let songs = [
     "Naat 1.mp3",
     "Naat 2.mp3",
-    "songs/song3.mp3",
-    "songs/song4.mp3"
+    "Song 3.mp3",
+    "Song 4.mp3"
 ];
 
 // CURRENT SONG INDEX
