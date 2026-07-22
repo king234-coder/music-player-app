@@ -1,147 +1,79 @@
+// GET HTML ELEMENTS
 let audio = document.getElementById("audio");
+let playBtn = document.getElementById("playBtn");
 let volume = document.getElementById("volume");
+let volumeValue = document.getElementById("volumeValue");
+let nowPlaying = document.getElementById("nowPlaying");
+let playlistUI = document.getElementById("playlist");
 
+// SONG LIST
 let songs = [
     "Naat 1.mp3",
     "Naat 2.mp3",
     "songs/song3.mp3",
-    "songs/song4.mp3",
-    "songs/song5.mp3",
-    "songs/song6.mp3"
+    "songs/song4.mp3"
 ];
 
+// CURRENT SONG INDEX
 let currentSong = 0;
 
-// Play / Pause
+// CREATE PLAYLIST UI AUTOMATICALLY
+songs.forEach((song, index) => {
+    let li = document.createElement("li");
+    li.innerText = song;
 
-function playPause(){
+    // CLICK → PLAY SONG
+    li.onclick = () => {
+        currentSong = index;
+        loadSong();
+    };
 
-    if(audio.paused){
-        audio.play();
-    }
-    else{
-        audio.pause();
-    }
+    playlistUI.appendChild(li);
+});
 
-}
-
-// Select song from playlist
-
-function playSong(src, element){
-
-    audio.src = src;
-    audio.play();
-
-    currentSong = songs.indexOf(src);
-
-    showSongName(src);
-
-    document.querySelectorAll("#playlist li")
-    .forEach(item=>{
-        item.classList.remove("active");
-    });
-
-    element.classList.add("active");
-
-}
-
-// Next Song
-
-function nextSong(){
-
-    currentSong++;
-
-    if(currentSong >= songs.length){
-        currentSong = 0;
-    }
-
-    loadSong();
-
-}
-
-// Previous Song
-
-function previousSong(){
-
-    currentSong--;
-
-    if(currentSong < 0){
-        currentSong = songs.length - 1;
-    }
-
-    loadSong();
-
-}
-
-// Load song
-
-function loadSong(){
-
+// LOAD SONG FUNCTION
+function loadSong() {
     audio.src = songs[currentSong];
-
     audio.play();
 
-    showSongName(songs[currentSong]);
+    // UPDATE TEXT
+    nowPlaying.innerText = "Now Playing: " + songs[currentSong];
 
-    let playlist = document.querySelectorAll("#playlist li");
-
-    playlist.forEach(item=>{
-        item.classList.remove("active");
-    });
-
-    playlist[currentSong].classList.add("active");
-
+    // UPDATE ACTIVE CLASS
+    document.querySelectorAll("#playlist li").forEach(li => li.classList.remove("active"));
+    playlistUI.children[currentSong].classList.add("active");
 }
 
-// Show current song
-
-function showSongName(song){
-
-    let name = song.split("/").pop();
-
-    document.getElementById("nowPlaying").innerText =
-    "Now Playing: " + name;
-
-}
-
-// Volume
-
-volume.oninput = function(){
-
-    audio.volume = this.value;
-
-    document.getElementById("volumeValue").innerText =
-    Math.round(this.value * 100) + "%";
-
-}
-
-// Default volume
-
-audio.volume = 0.5;
-volume.value = 0.5;
-
-// Auto next song after finish
-
-audio.onended = function(){
-
-    nextSong();
-
-};
-let playButton = document.querySelector(".controls button:nth-child(2)");
-
-function playPause(){
-
-    if(audio.paused){
-
+// PLAY / PAUSE TOGGLE
+function playPause() {
+    if (audio.paused) {
         audio.play();
-        playButton.innerHTML = "⏸";
-
-    }
-    else{
-
+    } else {
         audio.pause();
-        playButton.innerHTML = "▶";
-
     }
-
 }
+
+// CHANGE BUTTON ICON
+audio.onplay = () => playBtn.innerHTML = "⏸";
+audio.onpause = () => playBtn.innerHTML = "▶";
+
+// NEXT SONG
+function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong();
+}
+
+// PREVIOUS SONG
+function previousSong() {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    loadSong();
+}
+
+// VOLUME CONTROL
+volume.oninput = function() {
+    audio.volume = this.value;
+    volumeValue.innerText = Math.round(this.value * 100) + "%";
+};
+
+// DEFAULT VOLUME
+audio.volume = 0.5;
