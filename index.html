@@ -2,73 +2,52 @@
 <html>
 <head>
   <title>Music Player</title>
+    <link rel="icon" href="favicon.jpg">
+
+  <!-- CSS file link -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- Main Music Player Container -->
+<!-- MAIN PLAYER CONTAINER -->
 <div class="player">
 
-  <!-- Player Heading -->
+  <!-- TITLE -->
   <h2>🎵 Music Player</h2>
 
-  <!-- Current Playing Song Name -->
+  <!-- CURRENT SONG NAME -->
   <p id="nowPlaying">Now Playing: None</p>
 
-  <!-- Audio Player -->
+  <!-- AUDIO PLAYER -->
   <audio id="audio" controls></audio>
 
-  <!-- Music Controls -->
+  <!-- CONTROL BUTTONS -->
   <div class="controls">
-
+    <!-- PREVIOUS -->
     <button onclick="previousSong()">⏮</button>
-    <button onclick="playPause()">▶</button>
-    <button onclick="nextSong()">⏭</button>
 
+    <!-- PLAY / PAUSE -->
+    <button id="playBtn" onclick="playPause()">▶</button>
+
+    <!-- NEXT -->
+    <button onclick="nextSong()">⏭</button>
   </div>
 
-  <!-- Volume Controls -->
+  <!-- VOLUME CONTROL -->
   <div class="volume-box">
-
     🔊 Volume:
     <span id="volumeValue">50%</span>
     <br>
     <input type="range" id="volume" min="0" max="1" step="0.1">
-
   </div>
 
-  <!-- Song Playlist -->
-  <ul id="playlist">
-
-    <li onclick="playSong('Naat 1.mp3', this)">
-      Naat 1.mp3
-    </li>
-
-    <li onclick="playSong('Naat 2.mp3', this)">
-      Naat 2.mp3
-    </li>
-
-    <li onclick="playSong('songs/song3.mp3', this)">
-      Song 3.mp3
-    </li>
-
-    <li onclick="playSong('songs/song4.mp3', this)">
-      Song 5.mp3
-    </li>
-
-    <li onclick="playSong('songs/song5.mp3', this)">
-      Song 5.mp3
-    </li>
-
-    <li onclick="playSong('songs/song6.mp3', this)">
-      Song 6.mp3
-    </li>
-
-  </ul>
+  <!-- PLAYLIST -->
+  <ul id="playlist"></ul>
 
 </div>
 
+<!-- JS FILE -->
 <script src="script.js"></script>
 
 </body>
